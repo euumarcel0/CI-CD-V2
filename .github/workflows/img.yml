@@ -24,13 +24,13 @@ jobs:
       - name: Adicionar host EC2 ao known_hosts
         run: |
           ssh-keygen -t rsa -b 4096 -f ~/.ssh/id_rsa -N ''
-          ssh-keyscan -H 54.163.63.117 >> ~/.ssh/known_hosts
+          ssh-keyscan -H 34.230.20.222 >> ~/.ssh/known_hosts
 
       - name: Envio do arquivo via SCP
         if: always()
         run: |
           echo "$KEY_PATH" > ./chave.pem
           chmod 600 ./chave.pem
-          scp -i ./chave.pem images/*.* ec2-user@54.163.63.117:/var/www/html/img/
+          scp -i ./chave.pem images/*.* ec2-user@34.230.20.222:/var/www/html/img/
         env:
           KEY_PATH: ${{ secrets.CHAVE_PEM }}
